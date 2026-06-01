@@ -72,7 +72,8 @@
 	</main>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.dashjs.org/v5.0.0/modern/umd/dash.all.min.js"></script>
+    <!-- <script src="https://cdn.dashjs.org/v5.0.0/modern/umd/dash.all.min.js"></script> -->
+    <script src="https://cdn.dashjs.org/latest/modern/umd/dash.all.min.js"></script>
 
     <!-- we have to load the custom ABR rule here! -->
 	<script src="../ABR_Rules/LowestBitrateRule.js"></script>
@@ -83,7 +84,8 @@
     <script>
     (function () {
         var url = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd";
-        var local_url = "..\\MPD_lib\\Dummy_Video\\manifest.mpd";
+        var local_url_1 = "..\\MPD_lib\\Dummy_Video_1\\manifest.mpd";
+        var local_url_2 = "..\\MPD_lib\\Dummy_Video_2\\manifest.mpd";
         var player = dashjs.MediaPlayer().create();
         
     
@@ -91,30 +93,57 @@
 
         // step one: disable all built-in rules
         player.updateSettings({
-            abr: {
-                rules: {
-                    throughputRule: {
-                        active: false
-                    },
-                    bolaRule: {
-                        active: false
-                    },
-                    insufficientBufferRule: {
-                        active: false
-                    },
-                    switchHistoryRule: {
-                        active: false
-                    },
-                    droppedFramesRule: {
-                        active: false
-                    },
-                    abandonRequestsRule: {
-                        active: false
+                streaming: {
+                    abr: {
+                        rules: {
+                            throughputRule: {
+                                active: false
+                            },
+                            bolaRule: {
+                                active: false
+                            },
+                            insufficientBufferRule: {
+                                active: false
+                            },
+                            switchHistoryRule: {
+                                active: false
+                            },
+                            droppedFramesRule: {
+                                active: false
+                            },
+                            abandonRequestsRule: {
+                                active: false
+                            }
+                        }
                     }
                 }
+            });
+        
+        // player.updateSettings({
+        //     abr: {
+        //         rules: {
+        //             throughputRule: {
+        //                 active: false
+        //             },
+        //             bolaRule: {
+        //                 active: false
+        //             },
+        //             insufficientBufferRule: {
+        //                 active: false
+        //             },
+        //             switchHistoryRule: {
+        //                 active: false
+        //             },
+        //             droppedFramesRule: {
+        //                 active: false
+        //             },
+        //             abandonRequestsRule: {
+        //                 active: false
+        //             }
+        //         }
                 
-            }
-        });
+        //     }
+        // });
     
         // step two: add your own custom rule here, e.g. a simple rule that always selects the lowest bitrate
         // for now, we use the official LowestBitrateRule as an example, but you can replace it with your own custom logic
@@ -123,7 +152,7 @@
         player.addABRCustomRule('qualitySwitchRules', 'LowestBitrateRule', LowestBitrateRule);
     
         // playing is the final step, so we do it at the end after all setup is done
-        player.initialize(document.querySelector("#videoPlayer"), local_url, true);
+        player.initialize(document.querySelector("#videoPlayer"), local_url_2, true);
     })();
     </script>
 

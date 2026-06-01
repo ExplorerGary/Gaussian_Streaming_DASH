@@ -23,7 +23,9 @@
         function init() {
             var video,
                 player,
-                url = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd';
+                url = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
+                local_url_1 = "..\\MPD_lib\\Dummy_Video_1\\manifest.mpd",
+                local_url_2 = "..\\MPD_lib\\Dummy_Video_2\\manifest.mpd";
 
             video = document.querySelector('video');
             player = dashjs.MediaPlayer().create();
@@ -60,7 +62,8 @@
             /* about the structure of a custom rule */
             player.addABRCustomRule('qualitySwitchRules', 'LowestBitrateRule', LowestBitrateRule);
 
-            player.initialize(video, url, true);
+            // player.initialize(video, url, true);
+            player.initialize(video, local_url_1, true);
         }
     </script>
 </head>
