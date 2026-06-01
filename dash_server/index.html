@@ -152,7 +152,11 @@
         player.addABRCustomRule('qualitySwitchRules', 'LowestBitrateRule', LowestBitrateRule);
     
         // playing is the final step, so we do it at the end after all setup is done
+        // we can use both local and remote URLs, just make sure to update the path accordingly
+        
         player.initialize(document.querySelector("#videoPlayer"), local_url_2, true);
+
+        // player.initialize(document.querySelector("#videoPlayer"), url, true);
     })();
     </script>
 
